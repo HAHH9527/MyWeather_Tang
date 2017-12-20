@@ -15,9 +15,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn_getCity, btn_getWeather;
 
-
     private String city = "";
 
+    //Handler监听
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //初始化
     public void init() {
         btn_getCity = findViewById(R.id.btn_getCity);
         btn_getCity.setOnClickListener(
@@ -57,12 +58,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //启动获得城市
     private void getCity() {
         MyAMap myAMap = new MyAMap(this, handler);
         Thread myAMapThread = new Thread(myAMap);
         myAMapThread.start();
     }
 
+    //启动获得天气
     private void getWeather() {
         MyHeWeather myHeWeather = new MyHeWeather(city, handler);
         Thread myHeWeatherThread = new Thread(myHeWeather);
