@@ -1,6 +1,5 @@
-package com.example.a10248.myweather_tang;
+package com.example.a10248.myweather_tang.activity;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.a10248.myweather_tang.util.MyAMapThread;
+import com.example.a10248.myweather_tang.util.MyHeWeatherThread;
+import com.example.a10248.myweather_tang.util.MyMessageType;
+import com.example.a10248.myweather_tang.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -60,14 +64,14 @@ public class MainActivity extends AppCompatActivity {
 
     //启动获得城市
     private void getCity() {
-        MyAMap myAMap = new MyAMap(this, handler);
+        MyAMapThread myAMap = new MyAMapThread(this, handler);
         Thread myAMapThread = new Thread(myAMap);
         myAMapThread.start();
     }
 
     //启动获得天气
     private void getWeather() {
-        MyHeWeather myHeWeather = new MyHeWeather(city, handler);
+        MyHeWeatherThread myHeWeather = new MyHeWeatherThread(city, handler);
         Thread myHeWeatherThread = new Thread(myHeWeather);
         myHeWeatherThread.start();
     }

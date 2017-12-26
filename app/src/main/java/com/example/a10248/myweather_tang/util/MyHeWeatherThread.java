@@ -1,9 +1,10 @@
-package com.example.a10248.myweather_tang;
+package com.example.a10248.myweather_tang.util;
 
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.example.a10248.myweather_tang.bean.WeatherBean;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -21,16 +22,16 @@ import java.net.URLEncoder;
  * Created by 10248 on 2017/12/18.
  */
 
-public class MyHeWeather implements Runnable {
+public class MyHeWeatherThread implements Runnable {
 
     private String city;
     private final String heWeatherKey = "1c702b48348b4d728dd762dc68fd1877";
     private Handler handler;
 
-    public MyHeWeather() {
+    public MyHeWeatherThread() {
     }
 
-    public MyHeWeather(String city, Handler handler) {
+    public MyHeWeatherThread(String city, Handler handler) {
         this.handler = handler;
         Log.i("in city", city);
         try {

@@ -1,4 +1,4 @@
-package com.example.a10248.myweather_tang;
+package com.example.a10248.myweather_tang.util;
 
 /**
  * Created by 10248 on 2017/12/19.

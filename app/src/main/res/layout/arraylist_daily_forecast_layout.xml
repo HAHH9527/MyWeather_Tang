@@ -5,7 +5,7 @@
     android:background="#3377dd">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_theDay"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -19,11 +19,13 @@
         android:layout_centerHorizontal="true">
 
         <ImageView
+            android:id="@+id/img_theWeather"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/weather999" />
 
         <TextView
+            android:id="@+id/text_theWeather"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="20px"
@@ -39,6 +41,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/text_theTemperature"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"

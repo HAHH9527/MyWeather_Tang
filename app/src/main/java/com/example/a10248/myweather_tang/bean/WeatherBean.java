@@ -1,4 +1,4 @@
-package com.example.a10248.myweather_tang;
+package com.example.a10248.myweather_tang.bean;
 
 import com.google.gson.annotations.SerializedName;
 

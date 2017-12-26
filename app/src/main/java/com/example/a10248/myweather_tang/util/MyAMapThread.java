@@ -1,4 +1,4 @@
-package com.example.a10248.myweather_tang;
+package com.example.a10248.myweather_tang.util;
 
 import android.app.Activity;
 import android.os.Handler;
@@ -15,7 +15,7 @@ import com.amap.api.location.AMapLocationListener;
  * Created by 10248 on 2017/12/18.
  */
 
-public class MyAMap implements Runnable {
+public class MyAMapThread implements Runnable {
 
     //声明AMapLocationClient类对象
     private AMapLocationClient mLocationClient = null;
@@ -40,7 +40,7 @@ public class MyAMap implements Runnable {
         return mLocationClient;
     }
 
-    public MyAMap(Activity activity, Handler handler) {
+    public MyAMapThread(Activity activity, Handler handler) {
         this.mainActivity = activity;
         this.handler = handler;
 
