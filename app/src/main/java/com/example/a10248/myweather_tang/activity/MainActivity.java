@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn_getCity, btn_getWeather;
 
-    private String city = "";
+    private String city = "北京";
 
     //Handler监听
     private Handler handler = new Handler() {
