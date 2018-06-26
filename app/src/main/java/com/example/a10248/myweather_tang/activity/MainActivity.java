@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
 //            super.handleMessage(msg);
             if (msg.what == MyMessageType.Return_Weather_Message) {
-                Log.i("weather in main", msg.obj.toString());
+//                Log.i("weather in main", msg.obj.toString());
             } else if (msg.what == MyMessageType.Return_City_Message) {
                 city = (String) msg.obj;
                 Log.i("city in main", city);
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     //启动获得天气
     private void getWeather() {
-        MyHeWeatherThread myHeWeather = new MyHeWeatherThread(city, handler);
+        MyHeWeatherThread myHeWeather = new MyHeWeatherThread(city, handler,this);
         Thread myHeWeatherThread = new Thread(myHeWeather);
         myHeWeatherThread.start();
     }

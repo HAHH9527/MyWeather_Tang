@@ -19,6 +19,8 @@ import com.example.a10248.myweather_tang.util.MyAMapThread;
 import com.example.a10248.myweather_tang.util.MyHeWeatherThread;
 import com.example.a10248.myweather_tang.util.MyMessageType;
 
+import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now;
+
 public class WeatherActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tv_temperature;
@@ -35,6 +37,8 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        View decorView = getWindow().getDecorView();
+//        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         setContentView(R.layout.activity_weather);
         initView();
 
@@ -58,16 +62,19 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-            if (msg.what == MyMessageType.Return_Weather_Message) {
-                Log.i("weather in main", msg.obj.toString());
-                WeatherBean weatherBean = (WeatherBean) msg.obj;
-                tv_temperature.setText(weatherBean.getHeWeather6().get(0).getNow().getTmp());
-            } else if (msg.what == MyMessageType.Return_City_Message) {
+            super.handleMessage(msg);
+
+            if (msg.what == MyMessageType.Return_City_Message) {
                 city = (String) msg.obj;
                 Log.i("city in main", city);
                 Toast.makeText(getApplicationContext(), "当前城市:" + city, Toast.LENGTH_SHORT).show();
                 getWeather();
+            } else if (msg.what == MyMessageType.Return_Weather_Message) {
+                Log.i("weather in main", msg.obj.toString());
+                Now now = (Now) msg.obj;
+                tv_temperature.setText(now.getNow().getTmp());
+            } else if (msg.what == MyMessageType.Return_Weather_Message_Fail) {
+                Toast.makeText(getApplicationContext(), "天气查询出错", Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -81,7 +88,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
 
     //启动获得天气
     private void getWeather() {
-        MyHeWeatherThread myHeWeather = new MyHeWeatherThread(city, handler);
+        MyHeWeatherThread myHeWeather = new MyHeWeatherThread(city, handler, this);
         Thread myHeWeatherThread = new Thread(myHeWeather);
         myHeWeatherThread.start();
     }
