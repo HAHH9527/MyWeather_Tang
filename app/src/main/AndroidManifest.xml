@@ -41,19 +41,15 @@
         <!-- 2.声明service组件 -->
         <service android:name="com.amap.api.location.APSService" />
 
-        <!--Activity-->
-        <activity android:name=".activity.MainActivity">
+        <!-- Activity -->
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.TestActivity"></activity>
+        <activity android:name=".activity.WeatherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.TestActivity">
-
-        </activity>
-
     </application>
 
 </manifest>

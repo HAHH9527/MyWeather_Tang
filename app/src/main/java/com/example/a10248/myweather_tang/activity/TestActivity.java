@@ -71,7 +71,7 @@ public class TestActivity extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
             mData.add(item);
         }
-        SimpleAdapter adapter = new SimpleAdapter(this, mData, R.layout.arraylist_daily_forecast_layout, new String[]{"date", "cond_code_d", "cond_txt_d", "tmp"}, new int[]{R.id.text_theDay, R.id.img_theWeather, R.id.text_theWeather, R.id.text_temperature});
+        SimpleAdapter adapter = new SimpleAdapter(this, mData, R.layout.arraylist_daily_forecast_layout, new String[]{"date", "cond_code_d", "cond_txt_d", "tmp"}, new int[]{R.id.text_theDay, R.id.img_theDayWeather, R.id.tv_theDayWeather, R.id.text_temperature});
         list_daily_forecast.setAdapter(adapter);
 //        setListViewHeight(list_daily_forecast);
     }

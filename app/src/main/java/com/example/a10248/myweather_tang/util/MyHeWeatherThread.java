@@ -89,7 +89,7 @@ public class MyHeWeatherThread implements Runnable {
             System.out.println(sb.toString());
             Message msg = new Message();
             msg.what = MyMessageType.Return_Weather_Message;
-            msg.obj = sb;
+            msg.obj = getWeatherBean(sb.toString());
             handler.sendMessage(msg);
         } catch (Exception ignored) {
             Log.i("get weather err", "err");

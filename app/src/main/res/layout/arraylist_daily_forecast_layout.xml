@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20px"
+        android:layout_marginLeft="10dp"
         android:gravity="center"
         android:text="日期" />
 
@@ -19,13 +19,13 @@
         android:layout_centerHorizontal="true">
 
         <ImageView
-            android:id="@+id/img_theWeather"
+            android:id="@+id/img_theDayWeather"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/weather999" />
 
         <TextView
-            android:id="@+id/text_theWeather"
+            android:id="@+id/tv_theDayWeather"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="20px"
@@ -35,19 +35,50 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20px"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="空气质量" />
+            android:text="|" />
+
+        <TextView
+            android:id="@+id/tv_theDayAqi"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="质量" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_theTemperature"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="20px"
-        android:gravity="center"
-        android:text="温度" />
+        android:layout_marginRight="30dp">
 
+        <TextView
+            android:id="@+id/tv_temperatureHight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="34" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="/" />
+
+        <TextView
+            android:id="@+id/tv_temperatureLow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="20" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="°C" />
+    </LinearLayout>
 
 </RelativeLayout>
