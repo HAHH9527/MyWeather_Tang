@@ -2,16 +2,11 @@ package com.example.a10248.myweather_tang.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.SimpleAdapter;
 
 import com.example.a10248.myweather_tang.R;
-import com.example.a10248.myweather_tang.bean.WeatherBean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +20,7 @@ public class TestActivity extends AppCompatActivity {
 
     ArrayList<Map<String, Object>> mData = new ArrayList<Map<String, Object>>();
 
-    WeatherBean.HeWeather6Bean.DailyForecastBean dailyForecastBean = new WeatherBean.HeWeather6Bean.DailyForecastBean();
+//    WeatherBean.HeWeather6Bean.DailyForecastBean dailyForecastBean = new WeatherBean.HeWeather6Bean.DailyForecastBean();
 
 //    /**
 //     * 重新计算ListView的高度，解决ScrollView和ListView两个View都有滚动的效果，在嵌套使用时起冲突的问题
@@ -54,22 +49,22 @@ public class TestActivity extends AppCompatActivity {
 //    }
 
     private void init_dailyForecastBean() {
-        dailyForecastBean.setDate("2013-12-30");
-        dailyForecastBean.setCond_code_d("100");
-        dailyForecastBean.setCond_txt_d("晴");
-        dailyForecastBean.setTmp_max("4");
-        dailyForecastBean.setTmp_min("-5");
+//        dailyForecastBean.setDate("2013-12-30");
+//        dailyForecastBean.setCond_code_d("100");
+//        dailyForecastBean.setCond_txt_d("晴");
+//        dailyForecastBean.setTmp_max("4");
+//        dailyForecastBean.setTmp_min("-5");
     }
 
     //初始化最近几天天气
     private void init_list_daily_forecast() {
-        Map<String, Object> item = new HashMap<String, Object>();
-        item.put("date", dailyForecastBean.getDate());
-        item.put("cond_code_d", R.drawable.weather100);
-        item.put("cond_txt_d", dailyForecastBean.getCond_txt_d());
-        item.put("tmp", dailyForecastBean.getTmp_max() + "/" + dailyForecastBean.getTmp_min());
+//        Map<String, Object> item = new HashMap<String, Object>();
+//        item.put("date", dailyForecastBean.getDate());
+//        item.put("cond_code_d", R.drawable.weather100);
+//        item.put("cond_txt_d", dailyForecastBean.getCond_txt_d());
+//        item.put("tmp", dailyForecastBean.getTmp_max() + "/" + dailyForecastBean.getTmp_min());
         for (int i = 0; i < 10; i++) {
-            mData.add(item);
+//            mData.add(item);
         }
         SimpleAdapter adapter = new SimpleAdapter(this, mData, R.layout.arraylist_daily_forecast_layout, new String[]{"date", "cond_code_d", "cond_txt_d", "tmp"}, new int[]{R.id.text_theDay, R.id.img_theDayWeather, R.id.tv_theDayWeather, R.id.text_temperature});
         list_daily_forecast.setAdapter(adapter);

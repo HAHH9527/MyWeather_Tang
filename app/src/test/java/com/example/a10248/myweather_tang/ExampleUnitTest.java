@@ -1,6 +1,5 @@
 package com.example.a10248.myweather_tang;
 
-import com.example.a10248.myweather_tang.bean.WeatherBean;
 import com.example.a10248.myweather_tang.util.MyHeWeatherThread;
 
 import org.junit.Test;

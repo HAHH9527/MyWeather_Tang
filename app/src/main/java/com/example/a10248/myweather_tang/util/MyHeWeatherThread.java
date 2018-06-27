@@ -5,18 +5,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.example.a10248.myweather_tang.bean.WeatherBean;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.List;
 
 import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now;
@@ -54,10 +44,10 @@ public class MyHeWeatherThread implements Runnable {
 //        Log.i("UTF-8 city", this.city);
     }
 
-    public WeatherBean getWeatherBean(String weatherJson) {
-        WeatherBean weatherBean = new Gson().fromJson(weatherJson, WeatherBean.class);
-        return weatherBean;
-    }
+//    public WeatherBean getWeatherBean(String weatherJson) {
+//        WeatherBean weatherBean = new Gson().fromJson(weatherJson, WeatherBean.class);
+//        return weatherBean;
+//    }
 
     @Override
     public void run() {

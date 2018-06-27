@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="34"
+            android:text="00"
             android:textColor="@color/colorWhite"
             android:textSize="50dp" />
 
@@ -37,7 +37,7 @@
         android:layout_gravity="start"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
-        android:text="天心区"
+        android:text="未获取"
         android:textColor="@color/colorWhite"
         android:textSize="20dp" />
 
@@ -48,7 +48,7 @@
         android:layout_gravity="start"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
-        android:text="晴"
+        android:text="未知"
         android:textColor="@color/colorWhite"
         android:textSize="20dp" />
 
@@ -58,28 +58,63 @@
         android:layout_marginTop="100dp"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_quality"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/colorTransparent"
-            android:text="污染度"
-            android:textColor="#fff" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="风向:"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/tv_windir"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorTransparent"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#fff" />
+        </LinearLayout>
+
 
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:background="@android:color/white" />
 
-        <Button
-            android:id="@+id/btn_forecast"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/colorTransparent"
-            android:text="降雨量"
-            android:textColor="#fff" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorTransparent"
+                android:gravity="center"
+                android:text="降水:"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/tv_pcpn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorTransparent"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#fff" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

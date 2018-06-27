@@ -56,14 +56,14 @@ public class MyAMapThread implements Runnable {
         public void onLocationChanged(AMapLocation aMapLocation) {
             if (aMapLocation != null) {
                 Log.i("aMap city", aMapLocation.getCity());
-                city = aMapLocation.getCity();
+//                city = aMapLocation.getCity();
                 //Log显示当前城市
-                Log.i("aMap this city", city);
+//                Log.i("aMap this city", city);
 
-                //将城市传回主线程
+                //将定位信息传回主线程
                 Message msg = new Message();
                 msg.what = MyMessageType.Return_City_Message;
-                msg.obj = city;
+                msg.obj = aMapLocation;
                 handler.sendMessage(msg);
             } else {
                 Log.i("aMap", "aMapLocation == null");
@@ -85,6 +85,8 @@ public class MyAMapThread implements Runnable {
         mLocationClient.setLocationOption(mlocationOption);
         //设置定位监听
         mLocationClient.setLocationListener(mLocationListener);
+        //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
+        mlocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         Log.i("aMap", "initLocationDown");
     }
 
