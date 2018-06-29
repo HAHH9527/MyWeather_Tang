@@ -5,11 +5,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.google.gson.Gson;
+import com.example.a10248.myweather_tang.bean.basic.MyBasic;
+import com.example.a10248.myweather_tang.bean.weather.now.MyNow;
+import com.example.a10248.myweather_tang.bean.weather.now.MyNowBase;
 
 import java.util.List;
 
+import interfaces.heweather.com.interfacesmodule.bean.basic.Basic;
 import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now;
+import interfaces.heweather.com.interfacesmodule.bean.weather.now.NowBase;
 import interfaces.heweather.com.interfacesmodule.view.HeConfig;
 import interfaces.heweather.com.interfacesmodule.view.HeWeather;
 
@@ -31,7 +35,7 @@ public class MyHeWeatherThread implements Runnable {
     public MyHeWeatherThread() {
     }
 
-    public MyHeWeatherThread(String city, Handler handler,Context context) {
+    public MyHeWeatherThread(String city, Handler handler, Context context) {
         this.handler = handler;
         this.context = context;
         Log.i("in city", city);
@@ -53,7 +57,7 @@ public class MyHeWeatherThread implements Runnable {
     public void run() {
         HeConfig.init(heWeatherId, heWeatherKey);
         HeConfig.switchToFreeServerNode();
-        HeWeather.getWeatherNow(context,city, new HeWeather.OnResultWeatherNowBeanListener() {
+        HeWeather.getWeatherNow(context, city, new HeWeather.OnResultWeatherNowBeanListener() {
             @Override
             public void onError(Throwable throwable) {
                 throwable.printStackTrace();
@@ -64,9 +68,28 @@ public class MyHeWeatherThread implements Runnable {
 
             @Override
             public void onSuccess(List<Now> list) {
+                Now now = list.get(0);
+                Basic basic = now.getBasic();
+                NowBase nowBase = now.getNow();
+                //MyNow
+                MyNow myNow = new MyNow();
+                //MyBasic
+                MyBasic myBasic = new MyBasic(basic.getCid(), basic.getLocation(), basic.getParent_city(), basic.getAdmin_area(), basic.getCnty(), basic.getLat(), basic.getLon(), basic.getTz());
+                myBasic.setMyNow(myNow);
+                myBasic.saveThrows();
+                //MyNowBase
+                MyNowBase myNowBase = new MyNowBase(nowBase.getFl(), nowBase.getTmp(), nowBase.getCond_code(), nowBase.getCond_txt(), nowBase.getHum(), nowBase.getPcpn(), nowBase.getPres(), nowBase.getVis(), nowBase.getCloud(), nowBase.getWind_deg(), nowBase.getWind_dir(), nowBase.getWind_sc(), nowBase.getWind_spd());
+                myNowBase.setMyNow(myNow);
+                myNowBase.saveThrows();
+
+                myNow.setBasic(myBasic);
+                myNow.setNow(myNowBase);
+                myNow.setStatus(now.getStatus());
+                myNow.setUptime(now.getUpdate().getUtc());
+                myNow.saveThrows();
                 Message msg = new Message();
                 msg.what = MyMessageType.Return_Weather_Message;
-                msg.obj = list.get(0);
+                msg.obj = now;
                 handler.sendMessage(msg);
             }
         });

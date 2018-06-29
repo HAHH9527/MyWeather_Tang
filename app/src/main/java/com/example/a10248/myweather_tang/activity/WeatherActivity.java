@@ -1,5 +1,6 @@
 package com.example.a10248.myweather_tang.activity;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +19,8 @@ import com.example.a10248.myweather_tang.R;
 import com.example.a10248.myweather_tang.util.MyAMapThread;
 import com.example.a10248.myweather_tang.util.MyHeWeatherThread;
 import com.example.a10248.myweather_tang.util.MyMessageType;
+
+import org.litepal.tablemanager.Connector;
 
 import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now;
 
@@ -44,6 +47,9 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
 //        View decorView = getWindow().getDecorView();
 //        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         setContentView(R.layout.activity_weather);
+
+        SQLiteDatabase db = Connector.getDatabase();
+
         initView();
 
         getCity();
@@ -84,6 +90,13 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
             } else if (msg.what == MyMessageType.Return_Weather_Message) {
                 Log.i("weather in main", msg.obj.toString());
                 Now now = (Now) msg.obj;
+//                MyNow myNow = new MyNow();
+//                myNow.setBasic(now.getBasic());
+//                myNow.setStatus(now.getStatus());
+//                myNow.setNow(now.getNow());
+//                myNow.setUptime(now.getUpdate().getUtc());
+//                myNow.save();
+//                Log.i("save success", "111");
                 tv_temperature.setText(now.getNow().getTmp());
                 tv_address.setText(tv_address.getText() + " " + now.getBasic().getLocation());
                 tv_weatherText.setText(now.getNow().getCond_txt());
