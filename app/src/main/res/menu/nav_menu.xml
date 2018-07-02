@@ -1,11 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/item_setAutoLocation"
-        android:title="自动定位"></item>
-    <item
-        android:id="@+id/item_setCity"
-        android:title="自定城市"></item>
+    <group android:id="@+id/nav_menu_location">
+        <item
+            android:id="@+id/item_setAutoLocation"
+            android:title="自动定位"></item>
+        <item
+            android:id="@+id/item_setCity"
+            android:title="自定城市"></item>
+    </group>
+
+    <group android:id="@+id/nav_menu_bgm">
+        <item android:title="背景音操作">
+            <menu>
+                <item
+                    android:id="@+id/bgm_play"
+                    android:title="播放"></item>
+                <item
+                    android:id="@+id/bgm_stop"
+                    android:title="停止"></item>
+            </menu>
+        </item>
+    </group>
+
+    <group android:id="@+id/nav_menu_bgmSelect">
+        <item android:title="选择背景音">
+            <menu>
+                <item
+                    android:id="@+id/bgm_s1"
+                    android:title="森林"></item>
+                <item
+                    android:id="@+id/bgm_s2"
+                    android:title="夏夜"></item>
+                <item
+                    android:id="@+id/bgm_s3"
+                    android:title="海滩"></item>
+                <item
+                    android:id="@+id/bgm_s4"
+                    android:title="细雨"></item>
+                <item
+                    android:id="@+id/bgm_s5"
+                    android:title="炉火"></item>
+            </menu>
+        </item>
+    </group>
 
 </menu>
