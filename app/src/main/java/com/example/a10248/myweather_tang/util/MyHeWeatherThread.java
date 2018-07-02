@@ -5,9 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.example.a10248.myweather_tang.bean.basic.MyBasic;
-import com.example.a10248.myweather_tang.bean.weather.now.MyNow;
-import com.example.a10248.myweather_tang.bean.weather.now.MyNowBase;
+import com.example.a10248.myweather_tang.bean.weather.MyNow;
 
 import java.util.List;
 
@@ -69,27 +67,21 @@ public class MyHeWeatherThread implements Runnable {
             @Override
             public void onSuccess(List<Now> list) {
                 Now now = list.get(0);
-                Basic basic = now.getBasic();
-                NowBase nowBase = now.getNow();
-                //MyNow
-                MyNow myNow = new MyNow();
-                //MyBasic
-                MyBasic myBasic = new MyBasic(basic.getCid(), basic.getLocation(), basic.getParent_city(), basic.getAdmin_area(), basic.getCnty(), basic.getLat(), basic.getLon(), basic.getTz());
-                myBasic.setMyNow(myNow);
-                myBasic.saveThrows();
-                //MyNowBase
-                MyNowBase myNowBase = new MyNowBase(nowBase.getFl(), nowBase.getTmp(), nowBase.getCond_code(), nowBase.getCond_txt(), nowBase.getHum(), nowBase.getPcpn(), nowBase.getPres(), nowBase.getVis(), nowBase.getCloud(), nowBase.getWind_deg(), nowBase.getWind_dir(), nowBase.getWind_sc(), nowBase.getWind_spd());
-                myNowBase.setMyNow(myNow);
-                myNowBase.saveThrows();
 
-                myNow.setBasic(myBasic);
-                myNow.setNow(myNowBase);
-                myNow.setStatus(now.getStatus());
+                MyNow myNow = new MyNow();
                 myNow.setUptime(now.getUpdate().getUtc());
-                myNow.saveThrows();
+                myNow.setLocation(now.getBasic().getLocation());
+                myNow.setTemperature(now.getNow().getTmp());
+                myNow.setTemperature_feel(now.getNow().getFl());
+                myNow.setWeather(now.getNow().getCond_txt());
+                myNow.setWind_dir(now.getNow().getWind_dir());
+                myNow.setWind_sc(now.getNow().getWind_sc());
+                myNow.setPcpn(now.getNow().getPcpn());
+                myNow.save();
+
                 Message msg = new Message();
                 msg.what = MyMessageType.Return_Weather_Message;
-                msg.obj = now;
+                msg.obj = myNow;
                 handler.sendMessage(msg);
             }
         });

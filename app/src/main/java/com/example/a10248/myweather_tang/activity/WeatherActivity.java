@@ -9,30 +9,27 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.example.a10248.myweather_tang.R;
+import com.example.a10248.myweather_tang.bean.weather.MyNow;
 import com.example.a10248.myweather_tang.util.MyAMapThread;
 import com.example.a10248.myweather_tang.util.MyHeWeatherThread;
 import com.example.a10248.myweather_tang.util.MyMessageType;
 
 import org.litepal.tablemanager.Connector;
 
-import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now;
-
 public class WeatherActivity extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private TextView tv_temperature;
+    private TextView tv_temperatureFell;
     private TextView tv_address;
     private TextView tv_weatherText;
     private TextView tv_windir;
     private TextView tv_pcpn;
-    private Button btn_quality;
-    private Button btn_forecast;
     private ScrollView weather_layout;
     private SwipeRefreshLayout swipe_refresh;
     private DrawerLayout drawable_layout;
@@ -57,6 +54,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
 
     private void initView() {
         tv_temperature = (TextView) findViewById(R.id.tv_temperature);
+        tv_temperatureFell = (TextView) findViewById(R.id.tv_temperatureFell);
         tv_address = (TextView) findViewById(R.id.tv_address);
         tv_weatherText = (TextView) findViewById(R.id.tv_weatherText);
         tv_windir = (TextView) findViewById(R.id.tv_windir);
@@ -71,6 +69,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
 
 //        btn_quality.setOnClickListener(this);
 //        btn_forecast.setOnClickListener(this);
+
     }
 
     private Handler handler = new Handler() {
@@ -89,19 +88,13 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                 swipe_refresh.setRefreshing(false);
             } else if (msg.what == MyMessageType.Return_Weather_Message) {
                 Log.i("weather in main", msg.obj.toString());
-                Now now = (Now) msg.obj;
-//                MyNow myNow = new MyNow();
-//                myNow.setBasic(now.getBasic());
-//                myNow.setStatus(now.getStatus());
-//                myNow.setNow(now.getNow());
-//                myNow.setUptime(now.getUpdate().getUtc());
-//                myNow.save();
-//                Log.i("save success", "111");
-                tv_temperature.setText(now.getNow().getTmp());
-                tv_address.setText(tv_address.getText() + " " + now.getBasic().getLocation());
-                tv_weatherText.setText(now.getNow().getCond_txt());
-                tv_windir.setText(now.getNow().getWind_dir());
-                tv_pcpn.setText(now.getNow().getPcpn());
+                MyNow myNow = (MyNow) msg.obj;
+                tv_temperature.setText(myNow.getTemperature());
+                tv_temperatureFell.setText(myNow.getTemperature_feel());
+                tv_address.setText(tv_address.getText() + " " + myNow.getLocation());
+                tv_weatherText.setText(myNow.getWeather());
+                tv_windir.setText(myNow.getWind_dir() + " " + myNow.getWind_sc() + "级");
+                tv_pcpn.setText(myNow.getPcpn());
             } else if (msg.what == MyMessageType.Return_Weather_Message_Fail) {
                 Toast.makeText(getApplicationContext(), "天气查询出错", Toast.LENGTH_SHORT).show();
             }
@@ -125,12 +118,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.btn_quality:
-//
-//                break;
-//            case R.id.btn_forecast:
-//
-//                break;
+
         }
     }
 

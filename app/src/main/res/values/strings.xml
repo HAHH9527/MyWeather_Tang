@@ -2,4 +2,7 @@
     <string name="app_name">MyWeather_Tang</string>
     <string name="heWeatherKey">1c702b48348b4d728dd762dc68fd1877</string>
     <string name="heWeatherUrl">https://free-api.heweather.com/s6/weather</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

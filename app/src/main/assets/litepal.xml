@@ -5,15 +5,6 @@
     <version value="1"></version>
 
     <list>
-
-        <mapping class="com.example.a10248.myweather_tang.bean.weather.now.MyNowBase"></mapping>
-        <mapping class="com.example.a10248.myweather_tang.bean.basic.MyBasic"></mapping>
-        <!--<mapping class="interfaces.heweather.com.interfacesmodule.bean.basic.Update"></mapping>-->
-
-        <mapping class="com.example.a10248.myweather_tang.bean.weather.now.MyNow"></mapping>
-
-        <!--<mapping class="com.example.a10248.myweather_tang.bean.weather.now.Now"></mapping>-->
-        <!--<mapping class="com.example.a10248.myweather_tang.bean.basic.Basic"></mapping>-->
-        <!--<mapping class="com.example.a10248.myweather_tang.bean.basic.Update"></mapping>-->
+        <mapping class="com.example.a10248.myweather_tang.bean.weather.MyNow"></mapping>
     </list>
 </litepal>
