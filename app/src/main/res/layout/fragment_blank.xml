@@ -4,13 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:background="#3366ff"
+    android:background="#ffffff"
     tools:context=".activity.BlankFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_setAutoLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="自动定位" />
+
+        <Button
+            android:id="@+id/btn_setCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="输入城市" />
+    </LinearLayout>
 
 </FrameLayout>

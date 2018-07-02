@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".activity.WeatherActivity">
 
+    <ImageView
+        android:id="@+id/bing_pic_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawable_layout"
         android:layout_width="match_parent"
@@ -31,10 +37,9 @@
 
                     <include layout="@layout/layout_weather_now" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:background="@color/colorWhite"></LinearLayout>
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="10dp"></LinearLayout>-->
 
                     <!--<include layout="@layout/activity_second" />-->
 
@@ -57,7 +62,20 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <include layout="@layout/fragment_blank"></include>
+        <!--<include layout="@layout/fragment_blank"></include>-->
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_head"
+            app:menu="@menu/nav_menu">
+
+        </android.support.design.widget.NavigationView>
 
     </android.support.v4.widget.DrawerLayout>
+
+
 </FrameLayout>

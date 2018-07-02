@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+//    compileSdkVersion 26
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.example.a10248.myweather_tang"
         minSdkVersion 21
@@ -21,9 +23,15 @@ android {
 dependencies {
     //导入libs中的jar包 包含和风天气SDK 高德定位SDK
     api fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+//    implementation 'com.android.support:appcompat-v7:26.1.0'
+//    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+
     implementation 'com.android.support.constraint:constraint-layout:1.1.1'
-    implementation 'com.android.support:support-v4:26.1.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -31,4 +39,6 @@ dependencies {
     api 'com.google.code.gson:gson:2.8.4'
 //    api 'org.litepal.android:core:2.0.0'
     api 'com.squareup.okhttp3:okhttp:3.10.0'
+
+    api 'com.github.bumptech.glide:glide:4.5.0'
 }
