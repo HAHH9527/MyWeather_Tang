@@ -43,7 +43,6 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <!-- Activity -->
-        <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.WeatherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,6 +2,10 @@ package com.example.a10248.myweather_tang.bean.weather;
 
 import org.litepal.crud.LitePalSupport;
 
+/**
+ * 实时天气实体类
+ */
+
 public class MyNow extends LitePalSupport {
 
     private String uptime;

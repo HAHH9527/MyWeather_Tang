@@ -1,6 +1,6 @@
 package com.example.a10248.myweather_tang;
 
-import com.example.a10248.myweather_tang.util.MyHeWeatherThread;
+import com.example.a10248.myweather_tang.thread.MyHeWeatherThread;
 
 import org.junit.Test;
 

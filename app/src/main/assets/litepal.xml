@@ -2,9 +2,10 @@
 <litepal>
     <dbname value="myWeather_db"></dbname>
 
-    <version value="1"></version>
+    <version value="2"></version>
 
     <list>
         <mapping class="com.example.a10248.myweather_tang.bean.weather.MyNow"></mapping>
+        <mapping class="com.example.a10248.myweather_tang.bean.weather.MyForecast"></mapping>
     </list>
 </litepal>

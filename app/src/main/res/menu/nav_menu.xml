@@ -3,10 +3,10 @@
 
     <group android:id="@+id/nav_menu_location">
         <item
-            android:id="@+id/item_setAutoLocation"
+            android:id="@+id/nav_item_setAutoLocation"
             android:title="自动定位"></item>
         <item
-            android:id="@+id/item_setCity"
+            android:id="@+id/nav_item_setCity"
             android:title="自定城市"></item>
     </group>
 
@@ -15,9 +15,11 @@
             <menu>
                 <item
                     android:id="@+id/bgm_play"
+                    android:icon="@drawable/timer_continue_full_screen"
                     android:title="播放"></item>
                 <item
                     android:id="@+id/bgm_stop"
+                    android:icon="@drawable/timer_cancel_full_screen"
                     android:title="停止"></item>
             </menu>
         </item>
@@ -28,18 +30,23 @@
             <menu>
                 <item
                     android:id="@+id/bgm_s1"
+                    android:icon="@drawable/timer_forest_n"
                     android:title="森林"></item>
                 <item
                     android:id="@+id/bgm_s2"
+                    android:icon="@drawable/timer_summer_night_n"
                     android:title="夏夜"></item>
                 <item
                     android:id="@+id/bgm_s3"
+                    android:icon="@drawable/timer_beach_n"
                     android:title="海滩"></item>
                 <item
                     android:id="@+id/bgm_s4"
+                    android:icon="@drawable/timer_spring_rain_n"
                     android:title="细雨"></item>
                 <item
                     android:id="@+id/bgm_s5"
+                    android:icon="@drawable/timer_stove_fire_n"
                     android:title="炉火"></item>
             </menu>
         </item>
