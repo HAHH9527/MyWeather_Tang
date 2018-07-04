@@ -29,3 +29,7 @@
 #排除HeWeather
   -dontwarn interfaces.heweather.com.interfacesmodule.**
   -keep class interfaces.heweather.com.interfacesmodule.** { *;}
+
+#LitePal混淆文件
+  -keep class org.litepal.** {*;}
+  -keep class * extends org.litepal.crud.LitePalSupport{*;}

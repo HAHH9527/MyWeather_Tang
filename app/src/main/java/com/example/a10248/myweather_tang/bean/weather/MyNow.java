@@ -10,6 +10,7 @@ public class MyNow extends LitePalSupport {
 
     private String uptime;
     private String location;
+    private String serchLoc;
     private String temperature;
     private String temperature_feel;
     private String weather;
@@ -34,6 +35,14 @@ public class MyNow extends LitePalSupport {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getSerchLoc() {
+        return serchLoc;
+    }
+
+    public void setSerchLoc(String serchLoc) {
+        this.serchLoc = serchLoc;
     }
 
     public String getTemperature() {

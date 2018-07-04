@@ -9,6 +9,7 @@ public class MyForecast extends LitePalSupport {
 
     private String uptime;
     private String location;
+    private String serchLoc;
 
     private String date1;
     private String tmp1;
@@ -36,6 +37,14 @@ public class MyForecast extends LitePalSupport {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getSerchLoc() {
+        return serchLoc;
+    }
+
+    public void setSerchLoc(String serchLoc) {
+        this.serchLoc = serchLoc;
     }
 
     public String getDate1() {

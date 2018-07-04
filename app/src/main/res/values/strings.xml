@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyWeather_Tang</string>
+    <string name="app_name">和天气</string>
     <string name="heWeatherId">HE1712180908151990</string>
     <string name="heWeatherKey">1c702b48348b4d728dd762dc68fd1877</string>
 </resources>
