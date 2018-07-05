@@ -6,6 +6,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.example.a10248.myweather_tang.R;
+import com.example.a10248.myweather_tang.bean.weather.MyAir;
 import com.example.a10248.myweather_tang.bean.weather.MyForecast;
 import com.example.a10248.myweather_tang.bean.weather.MyNow;
 import com.example.a10248.myweather_tang.util.MyMessageType;
@@ -15,6 +16,8 @@ import org.litepal.LitePal;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import interfaces.heweather.com.interfacesmodule.bean.air.now.AirNow;
+import interfaces.heweather.com.interfacesmodule.bean.air.now.AirNowCity;
 import interfaces.heweather.com.interfacesmodule.bean.weather.forecast.Forecast;
 import interfaces.heweather.com.interfacesmodule.bean.weather.forecast.ForecastBase;
 import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now;
@@ -52,7 +55,7 @@ public class MyHeWeatherThread implements Runnable {
 
         //获取实时天气
         //从数据库中查询
-        List<MyNow> sqlNow = LitePal.where("uptime like ?", date).limit(1).find(MyNow.class);
+        List<MyNow> sqlNow = LitePal.where("uptime like ? AND serchloc = ?", date, city).limit(1).find(MyNow.class);
         if (sqlNow.size() >= 1) {//如果查询出数据
             Message msg = new Message();
             msg.what = MyMessageType.Return_WeatherNow_Message;
@@ -62,7 +65,6 @@ public class MyHeWeatherThread implements Runnable {
             HeWeather.getWeatherNow(context, city, new HeWeather.OnResultWeatherNowBeanListener() {
                 @Override
                 public void onError(Throwable throwable) {
-                    throwable.printStackTrace();
                     Message msg = new Message();
                     msg.what = MyMessageType.Return_WeatherNow_Message_Fail;
                     handler.sendMessage(msg);
@@ -94,7 +96,7 @@ public class MyHeWeatherThread implements Runnable {
 
         //获取未来天气
         //从数据库中查询
-        List<MyForecast> sqlForecast = LitePal.where("uptime like ?", date).limit(1).find(MyForecast.class);
+        List<MyForecast> sqlForecast = LitePal.where("uptime like ? AND serchloc = ?", date, city).limit(1).find(MyForecast.class);
         if (sqlForecast.size() >= 1) {//如果查询出数据
             Message msg = new Message();
             msg.what = MyMessageType.Return_WeatherForecast_Message;
@@ -104,7 +106,6 @@ public class MyHeWeatherThread implements Runnable {
             HeWeather.getWeatherForecast(context, city, new HeWeather.OnResultWeatherForecastBeanListener() {
                 @Override
                 public void onError(Throwable throwable) {
-                    throwable.printStackTrace();
                     Message msg = new Message();
                     msg.what = MyMessageType.Return_WeatherForecast_Message_Fail;
                     handler.sendMessage(msg);
@@ -136,6 +137,53 @@ public class MyHeWeatherThread implements Runnable {
                     Message msg = new Message();
                     msg.what = MyMessageType.Return_WeatherForecast_Message;
                     msg.obj = myForecast;
+                    handler.sendMessage(msg);
+                }
+            });
+        }
+
+        //获取空气质量
+        //从数据库中查询
+        List<MyAir> sqlAir = LitePal.where("uptime like ? AND serchloc = ?", date, city).limit(1).find(MyAir.class);
+        if (sqlAir.size() >= 1) {//如果查询出数据
+            Message msg = new Message();
+            msg.what = MyMessageType.Return_WeatherForecast_Message;
+            msg.obj = sqlForecast.get(0);
+            handler.sendMessage(msg);
+        } else {//在线查询
+            HeWeather.getAirNow(context, city, new HeWeather.OnResultAirNowBeansListener() {
+                @Override
+                public void onError(Throwable throwable) {
+                    System.out.println(throwable.toString());
+                    Message msg = new Message();
+                    msg.what = MyMessageType.Return_Air_Message_Fail;
+                    handler.sendMessage(msg);
+                }
+
+                @Override
+                public void onSuccess(List<AirNow> list) {
+                    AirNow airNow = list.get(0);
+                    AirNowCity airNowCity = airNow.getAir_now_city();
+                    MyAir myAir = new MyAir();
+                    myAir.setUptime(airNow.getUpdate().getLoc());
+                    myAir.setSerchLoc(city);
+                    myAir.setPub_time(airNow.getAir_now_city().getPub_time());
+                    myAir.setLocation(airNow.getBasic().getLocation());
+                    myAir.setQlty(airNowCity.getQlty());
+                    myAir.setMain(airNowCity.getMain());
+                    myAir.setAqi(airNowCity.getAqi());
+                    myAir.setPm25(airNowCity.getPm25());
+                    myAir.setPm10(airNowCity.getPm10());
+                    myAir.setNo2(airNowCity.getNo2());
+                    myAir.setSo2(airNowCity.getSo2());
+                    myAir.setCo(airNowCity.getCo());
+                    myAir.setO3(airNowCity.getO3());
+
+                    myAir.save();
+
+                    Message msg = new Message();
+                    msg.what = MyMessageType.Return_Air_Message_Fail;
+                    msg.obj = myAir;
                     handler.sendMessage(msg);
                 }
             });
