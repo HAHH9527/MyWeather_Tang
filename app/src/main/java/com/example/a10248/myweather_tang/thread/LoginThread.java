@@ -31,7 +31,9 @@ public class LoginThread implements Runnable {
             User retUser = HttpUtil.post(url, jsonUser);
             Log.i("login", retUser.getResult() + "");
             Message msg = new Message();
-            if (retUser.getResult() == User.Login_success) {
+            if (retUser == null) {
+                msg.what = MyMessageType.Login_failed;
+            } else if (retUser.getResult() == User.Login_success) {
                 msg.what = MyMessageType.Login_success;
                 msg.obj = retUser.getUserNick();
             } else if (retUser.getResult() == User.Login_failed) {

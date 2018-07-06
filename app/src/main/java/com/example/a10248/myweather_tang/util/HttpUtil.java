@@ -33,7 +33,7 @@ public class HttpUtil {
         if (response.isSuccessful()) {
             return new Gson().fromJson(response.body().string(), User.class);
         } else {
-            throw new IOException("Unexpected code " + response);
+            return null;
         }
     }
 

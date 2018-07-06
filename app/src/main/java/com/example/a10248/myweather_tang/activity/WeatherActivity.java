@@ -484,6 +484,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
 
     private void exit() {
         isLogin = false;
+        stopBGM();
         tv_user_name.setText("点击登录/注册");
     }
 

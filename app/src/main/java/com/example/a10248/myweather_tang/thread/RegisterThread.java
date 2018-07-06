@@ -25,7 +25,9 @@ public class RegisterThread implements Runnable {
             User retUser = HttpUtil.post(url, jsonUser);
             Log.i("register", retUser.getResult() + "");
             Message msg = new Message();
-            if (retUser.getResult() == User.Register_success) {
+            if (retUser == null) {
+                msg.what = MyMessageType.Register_failed;
+            } else if (retUser.getResult() == User.Register_success) {
                 msg.what = MyMessageType.Register_success;
             } else if (retUser.getResult() == User.Register_failed) {
                 msg.what = MyMessageType.Register_failed;

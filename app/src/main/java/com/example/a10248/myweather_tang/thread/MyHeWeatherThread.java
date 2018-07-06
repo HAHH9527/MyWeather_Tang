@@ -1,6 +1,7 @@
 package com.example.a10248.myweather_tang.thread;
 
 import android.content.Context;
+import android.net.wifi.aware.PublishConfig;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -53,6 +54,8 @@ public class MyHeWeatherThread implements Runnable {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh");
         String date = sDateFormat.format(new java.util.Date()) + "%";
 
+//        final MyNow[] tempNow = new MyNow[1];
+
         //获取实时天气
         //从数据库中查询
         List<MyNow> sqlNow = LitePal.where("uptime like ? AND serchloc = ?", date, city).limit(1).find(MyNow.class);
@@ -61,6 +64,7 @@ public class MyHeWeatherThread implements Runnable {
             msg.what = MyMessageType.Return_WeatherNow_Message;
             msg.obj = sqlNow.get(0);
             handler.sendMessage(msg);
+//            tempNow[0] = sqlNow.get(0);
         } else {//在线查询
             HeWeather.getWeatherNow(context, city, new HeWeather.OnResultWeatherNowBeanListener() {
                 @Override
@@ -90,6 +94,8 @@ public class MyHeWeatherThread implements Runnable {
                     msg.what = MyMessageType.Return_WeatherNow_Message;
                     msg.obj = myNow;
                     handler.sendMessage(msg);
+
+//                    tempNow[0] = myNow;
                 }
             });
         }
@@ -154,10 +160,33 @@ public class MyHeWeatherThread implements Runnable {
             HeWeather.getAirNow(context, city, new HeWeather.OnResultAirNowBeansListener() {
                 @Override
                 public void onError(Throwable throwable) {
+
+//                    MyAir myAir = new MyAir();
+//                    myAir.setUptime(tempNow[0].getUptime());
+//                    myAir.setSerchLoc(city);
+//                    myAir.setPub_time(tempNow[0].getUptime());
+//                    myAir.setLocation(tempNow[0].getLocation());
+//                    myAir.setQlty("良");
+//                    myAir.setMain("PM2.5");
+//                    myAir.setAqi("74");
+//                    myAir.setPm25("66");
+//                    myAir.setPm10("78");
+//                    myAir.setNo2("40");
+//                    myAir.setSo2("30");
+//                    myAir.setCo("33");
+//                    myAir.setO3("20");
+//
+//                    myAir.save();
+
                     System.out.println(throwable.toString());
                     Message msg = new Message();
                     msg.what = MyMessageType.Return_Air_Message_Fail;
                     handler.sendMessage(msg);
+
+//                    Message msg = new Message();
+//                    msg.what = MyMessageType.Return_Air_Message_Fail;
+//                    msg.obj = myAir;
+//                    handler.sendMessage(msg);
                 }
 
                 @Override
@@ -182,7 +211,7 @@ public class MyHeWeatherThread implements Runnable {
                     myAir.save();
 
                     Message msg = new Message();
-                    msg.what = MyMessageType.Return_Air_Message_Fail;
+                    msg.what = MyMessageType.Return_Air_Message;
                     msg.obj = myAir;
                     handler.sendMessage(msg);
                 }
