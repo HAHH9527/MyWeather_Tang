@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +45,8 @@ import com.example.a10248.myweather_tang.util.MyMessageType;
 import org.litepal.tablemanager.Connector;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -85,6 +89,16 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     private TextView tv_windir;
     private TextView tv_pcpn;
 
+    //蝴蝶效果
+    private ImageView butterfly;
+    // 记录蝴蝶ImageView当前的位置
+    private float curX = 0;
+    private float curY = 30;
+    // 记录蝴蝶ImageView下一个位置的坐标
+    private float nextX = 0;
+    private float nextY = 0;
+    private AnimationDrawable butterflyAni;
+
     //未来天气
     private TextView tv_forecast1_date;
     private TextView tv_forecast1_weather;
@@ -116,6 +130,8 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         SQLiteDatabase db = Connector.getDatabase();
         //获取视图控件
         initView();
+        //
+        initAni();
         //加载必应每日一图作为背景
         loadBingPic();
 
@@ -168,6 +184,24 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         tv_air_So2 = (TextView) findViewById(R.id.tv_air_So2);
         tv_air_co = (TextView) findViewById(R.id.tv_air_co);
         tv_air_O3 = (TextView) findViewById(R.id.tv_air_O3);
+
+        butterfly = (ImageView) findViewById(R.id.butterfly);
+    }
+
+    /**
+     * 初始化动画
+     */
+    private void initAni() {
+        // 开始播放蝴蝶振翅的逐帧动画
+        butterflyAni = (AnimationDrawable) butterfly.getBackground();
+        butterflyAni.start();  // ②
+        // 通过定制器控制每0.2秒运行一次TranslateAnimation动画
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(0x123);
+            }
+        }, 0, 200);
     }
 
     /**
@@ -495,6 +529,24 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+                case 0x123:
+                    // 横向上一直向右飞
+                    if (nextX > 320) {
+                        curX = nextX = 0;
+                    } else {
+                        nextX += 8;
+                    }
+                    // 纵向上可以随机上下
+                    nextY = curY + (float) (Math.random() * 10 - 5);
+                    // 设置显示蝴蝶的ImageView发生位移改变
+                    TranslateAnimation anim = new TranslateAnimation(
+                            curX, nextX, curY, nextY);
+                    curX = nextX;
+                    curY = nextY;
+                    anim.setDuration(200);
+                    // 开始位移动画
+                    butterfly.startAnimation(anim);
+                    break;
                 case MyMessageType.Return_City_Message:
                     aMapLocation = (AMapLocation) msg.obj;
                     Toast.makeText(getApplicationContext(), "当前城市:" + aMapLocation.getCity(), Toast.LENGTH_SHORT).show();
